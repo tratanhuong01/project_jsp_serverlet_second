@@ -1,0 +1,50 @@
+<%-- any content can be specified here e.g.: --%>
+<%@page import="model.DAO"%>
+<%@page import="model.User"%>
+<%@page import="StringUtil.StringCheck"%>
+<%@ page pageEncoding="UTF-8" %>
+<div id="header">
+    <div style="width: 10%;">
+        <a href="ProcessReturnIndex"><h3>DDS</h3></a>
+    </div>
+    <div class="form-group">
+        <input name="email" placeholder="Bạn muốn tìm gì ?" type="text" class="form-control" id="inputAddress" placeholder="">
+        <button type="button" class="btn btn-success">Tìm</button>
+    </div>
+    <% User user = (User) session.getAttribute("Users"); %>
+    <% if (user != null) {%>
+    <div class="loginOrRegister">
+        <ul>
+            <li><a href=""><%= StringCheck.Check(user.getLastName())%></a></li>
+            <li><a href="ProcessLogout">Đăng Xuất</a></li>
+        </ul>
+    </div>
+    <div class="cart-shop">
+        <a style="position: relative;left: 105px;" href="ProcessDisplayCart"><i style="font-size: 40px;" class="fas fa-shopping-cart"></i></a>
+        <span style="border-radius: 50%;
+              padding: 3px 11px;
+              background-color: skyblue;
+              position: absolute;
+              top: 8px;
+              right: 250px;"><%= String.valueOf((int)session.getAttribute("numberAmount")) == null ? String.valueOf(0) : String.valueOf((int)session.getAttribute("numberAmount")) %></span>
+    </div>
+    <%} else {%>
+    <div class="loginOrRegister">
+        <ul>
+            <li><a href="register.jsp">Đăng Kí</a></li>
+            <li><a href="login.jsp">Đăng Nhập</a></li>
+        </ul>
+    </div>
+    <div class="cart-shop">
+        <a style="position: relative;left: 105px;" href=""><i style="font-size: 40px;" class="fas fa-shopping-cart"></i></a>
+        <span style="border-radius: 50%;
+              padding: 3px 11px;
+              background-color: skyblue;
+              position: absolute;
+              top: 8px;
+              right: 250px;"><%= "0" %></span>
+        
+    </div>
+    <% }%>
+    
+</div>
